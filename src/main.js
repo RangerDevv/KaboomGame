@@ -10,18 +10,19 @@ loadAseprite("Turn", "sprites/player/playerTurn.svg")
 const player=add([
     sprite("Player"),
     pos(80, 40),
-	LEFT = -80,
-	RIGHT = 80,
-	UP = -80,
-	DOWN = 60,
+	"player",
+	LEFT = -100,
+	RIGHT = 100,
+	UP = -100,
+	DOWN = 100,
 	area(),
 	solid()
 ])
-
-const rect = add([
+const recto = add([
     rect(width(), 48),
     pos(0, height() - 48),
     outline(4),
+	"rectangle",
     area(),
     solid(),
     color(127, 200, 255),
@@ -40,6 +41,7 @@ onKeyDown("down", () => {
     player.move(0, DOWN)
 })
 
-onCollide("player", "rect", () => {
+player.onCollide("rectangle", () => {
     console.log("WOW!")
+	destroyAll("rectangle")
 })
