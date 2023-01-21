@@ -9,6 +9,8 @@ loadAseprite("Player", "sprites/player/playerFront.svg")
 loadAseprite("turnLeft", "sprites/player/playerTurnLeft.svg")
 loadAseprite("turnRight", "sprites/player/playerTurnRight.svg")
 loadAseprite("Back", "sprites/player/playerBack.svg")
+loadAseprite("sChest", "sprites/Items/smallChest.svg")
+
 
 const player=add([
     sprite("Player"),
@@ -20,7 +22,10 @@ const player=add([
 	DOWN = 100,
 	area(),
 	solid(),
-	{health : 100}
+	{
+        health : 100,
+        Holding : false
+    }
 ])
 const border1 = add([
     rect(width(), 48),
@@ -54,6 +59,44 @@ const border4 = add([
     solid(),
     color(127, 200, 255),
 ])
+
+addLevel([
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+    "                      =    ",
+    "                           ", 
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+    "                           ",
+], {
+    // define the size of each block
+    width: 32,
+    height: 32,
+    // define what each symbol means, by a function returning a component list (what will be passed to add())
+    "=": () => [
+        sprite("sChest"),
+        area(),
+        solid(),
+        "Chest"
+    ],
+    // "$": () => [
+    //     sprite("coin"),
+    //     area(),
+    //     pos(0, -9),
+    // ],
+    // "^": () => [
+    //     sprite("spike"),
+    //     area(),
+    //     "danger",
+    // ],
+})
 
 const dialogs = [
     [ "Trosky: Huh? Where am I? I have to get out of here as soon as possible. " ],
@@ -114,4 +157,35 @@ player.onCollide("rectangle", () => {
     console.log(player.health)
 	// destroyAll("rectangle")
 })
+
+player.onCollide("Chest", () => {
+    onKeyRelease("e", () => {
+        if (player.Holding == true) {
+            readd(dialogBox)
+            readd(txt)
+            player.Holding = true
+            dialogs.push("YES! I CAN ESCAPE!")
+            txt.text = dialogs[dialogs.length -1]
+            setTimeout(() => {
+                destroy(dialogBox)
+                destroy(txt)
+                console.log(dialogs.toString)
+                player.Holding = false
+                destroy(player)
+            }, 2000);
+        } else {
+            readd(dialogBox)
+            readd(txt)
+            dialogs.push("I found a key!")
+            txt.text = dialogs[dialogs.length -1]
+            setTimeout(() => {
+                destroy(dialogBox)
+                destroy(txt)
+                console.log(dialogs.toString)
+                player.Holding = true
+            }, 2000);
+        }
+    })
+})
+
 
