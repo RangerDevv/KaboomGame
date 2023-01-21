@@ -3,6 +3,8 @@ kaboom({
 	background:[215,155,25]
   })
 
+let currDiag = 0
+
 loadAseprite("Player", "sprites/player/playerFront.svg")
 loadAseprite("turnLeft", "sprites/player/playerTurnLeft.svg")
 loadAseprite("turnRight", "sprites/player/playerTurnRight.svg")
@@ -23,7 +25,6 @@ const player=add([
 const border1 = add([
     rect(width(), 48),
     pos(0, height()-48),
-    outline(4),
 	"rectangle",
     area(),
     solid(),
@@ -32,7 +33,6 @@ const border1 = add([
 const border2 = add([
     rect(width(), 48),
     pos(0, 0),
-    outline(4),
 	"rectangle",
     area(),
     solid(),
@@ -41,7 +41,6 @@ const border2 = add([
 const border3 = add([
     rect(48 , height()),
     pos(0 , 0),
-    outline(4),
 	"rectangle",
     area(),
     solid(),
@@ -50,7 +49,6 @@ const border3 = add([
 const border4 = add([
     rect(48 , height()),
     pos(width() -48, 0),
-    outline(4),
 	"rectangle",
     area(),
     solid(),
@@ -58,16 +56,30 @@ const border4 = add([
 ])
 
 const dialogs = [
-    [ "Trosky", "Huh? Where am I? I have to get out of here as soon as possible. " ],
+    [ "Trosky: Huh? Where am I? I have to get out of here as soon as possible. " ],
+	[ "Trosky: I have to find something... a kay or a crowbar maybe?" ],
 ]
 
-add([
+const dialogBox = add([
     rect(width() - 200, 120, { radius: 32 }),
     origin("center"),
     pos(center().x, height() - 100),
     // area(),
     // solid(),
     // color(127, 200, 255),
+	"DiagBox"
+])
+
+const txt = add([
+    text("Trosky: Huh? Where am I? I have to get out of here as soon as possible.", { size: 32, width: width() - 230 }),
+    pos(dialogBox.pos),
+    origin("center")
+])
+
+const avatar = add([
+    sprite("Back"),
+    scale(1),
+    origin("right"),
 ])
 
 onKeyDown("left", () => {
@@ -85,6 +97,16 @@ onKeyDown("up", () => {
 onKeyDown("down", () => {
     player.move(0, DOWN)
 	player.use(sprite("Player"))
+})
+
+onKeyPress("space", () => {
+	txt.text = dialogs[currDiag]
+	currDiag++
+	if (currDiag>dialogs.length) {
+		destroy(dialogBox)
+		destroy(txt)
+	}
+
 })
 
 player.onCollide("rectangle", () => {
