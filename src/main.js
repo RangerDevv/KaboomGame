@@ -56,14 +56,18 @@ const border4 = add([
     solid(),
     color(127, 200, 255),
 ])
+
+const dialogs = [
+    [ "Trosky", "Huh? Where am I? I have to get out of here as soon as possible. " ],
+]
+
 add([
-    rect(48 , height()),
-    pos(width() -48, 0),
-    outline(4),
-	"rectangle",
-    area(),
-    solid(),
-    color(127, 200, 255),
+    rect(width() - 200, 120, { radius: 32 }),
+    origin("center"),
+    pos(center().x, height() - 100),
+    // area(),
+    // solid(),
+    // color(127, 200, 255),
 ])
 
 onKeyDown("left", () => {
