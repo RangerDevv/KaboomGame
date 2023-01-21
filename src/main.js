@@ -160,20 +160,20 @@ player.onCollide("rectangle", () => {
 
 player.onCollide("Chest", () => {
     onKeyRelease("e", () => {
-        if (player.Holding == true) {
-            readd(dialogBox)
-            readd(txt)
-            player.Holding = true
-            dialogs.push("YES! I CAN ESCAPE!")
-            txt.text = dialogs[dialogs.length -1]
-            setTimeout(() => {
-                destroy(dialogBox)
-                destroy(txt)
-                console.log(dialogs.toString)
-                player.Holding = false
-                destroy(player)
-            }, 2000);
-        } else {
+        // if (player.Holding == true) {
+        //     readd(dialogBox)
+        //     readd(txt)
+        //     player.Holding = true
+        //     dialogs.push("YES! I CAN ESCAPE!")
+        //     txt.text = dialogs[dialogs.length -1]
+        //     setTimeout(() => {
+        //         destroy(dialogBox)
+        //         destroy(txt)
+        //         console.log(dialogs.toString)
+        //         player.Holding = false
+        //         destroy(player)
+        //     }, 2000);
+        // } else {
             readd(dialogBox)
             readd(txt)
             dialogs.push("I found a key!")
@@ -184,8 +184,7 @@ player.onCollide("Chest", () => {
                 console.log(dialogs.toString)
                 player.Holding = true
             }, 2000);
-        }
+        // }
     })
 })
-
 
