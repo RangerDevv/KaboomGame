@@ -1,0 +1,9 @@
+<svg width="28" height="99" viewBox="0 0 28 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="18" height="37" transform="matrix(-1 0 0 1 22.9998 62)" fill="#3600D0"/>
+<rect width="22" height="22" rx="5" transform="matrix(-1 0 0 1 23.9998 0)" fill="#E1E1E1"/>
+<rect x="28" y="62" width="28" height="40" transform="rotate(180 28 62)" fill="#BA0202"/>
+<rect width="1" height="40" transform="matrix(-1 0 0 1 1 22)" fill="black"/>
+<rect width="1" height="40" transform="matrix(-1 0 0 1 28 22)" fill="black"/>
+<rect width="26" height="2" transform="matrix(-1 0 0 1 27 60)" fill="black"/>
+<ellipse rx="1.5" ry="2.5" transform="matrix(-1 0 0 1 20.5 8.5)" fill="black"/>
+</svg>
